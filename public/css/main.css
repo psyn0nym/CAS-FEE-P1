@@ -1,0 +1,235 @@
+/* Basics */
+html, body{ 
+    margin: 0;
+    padding:0;
+    height:100%;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background:url(../img/Chalkboard-Background.jpg) center/cover fixed;
+}
+
+body.v2{ background:#ccc; }
+
+*, ::after, ::before { box-sizing:border-box; }
+
+.container{
+    max-width: 1280px;
+    padding:0 20px;
+    position:relative;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.row{
+    margin-left:-20px;
+    margin-right:-20px;
+}
+
+.flex,
+.row{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+[class^='col'], 
+.row > *{
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+    padding: 0 15px;
+}
+
+.shadow, 
+input,
+textarea,
+select,
+.btn{ box-shadow: 0 8px 6px -6px rgba(0,0,0,0.5); }
+
+.btn{
+    display: inline-block;
+    color: rgba(255,255,255,0.3);
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding-left:0;
+    text-align:center;
+}
+
+.btn.sort:after{ content:"⏷"; }
+.btn.sort[data-order="desc"]:after{ content:"⏶"; }
+
+/* DOM Start */
+#main{ margin-top:40px; }
+
+#notes{ 
+    /* opacity: 0; */
+    transition: all 0.25s ease;
+}
+
+#main.hasTasks #notes{ opacity:1; }
+
+/* Forms */
+#tasks-input{
+    flex-grow: 0.5;
+    margin-top:27px;
+}
+
+#tasks-input > input{
+    font-size:24px;
+    padding:10px;
+    width:100%;
+    border-radius:3px; 
+    margin-bottom:40px;
+    border:none;
+    outline:none; 
+}
+
+textarea:focus::-webkit-input-placeholder,
+input:focus::-webkit-input-placeholder { color:transparent; }
+textarea:focus:-moz-placeholder,
+input:focus:-moz-placeholder { color:transparent; } 
+textarea:focus::-moz-placeholder,
+input:focus::-moz-placeholder { color:transparent; } 
+textarea:focus:-ms-input-placeholder,
+input:focus:-ms-input-placeholder { color:transparent; }
+
+#tasks-input fieldset{ 
+    /*display:none; */
+    margin:0;
+    padding:0;
+    border:none;
+    margin: -20px 0 40px;
+    width:100%;
+}
+
+#tasks-input fieldset *{
+    margin:0;
+    padding:10px;
+    border:none;
+    font-size: 16px; 
+    display:block;
+    width:100%;
+    border-radius:3px;
+    margin-bottom: 5px;
+}
+
+#tasks-input fieldset textarea{ min-height:200px; }
+
+option{ background:#333; }
+option[value="1"]{ color:#FC6042; }
+option[value="2"]{ color:#EEE657; }
+option[value="3"]{ color:#2CC990; }
+
+button[type="submit"]{ color:black; }
+button[type="submit"]::after{ content:"Aufgabe hinzufügen"; }
+button[type="submit"][data-id]::after{ content:"Änderungen speichern"; }
+
+/* Tasks */
+.grid-entry, 
+.btn{ 
+    padding: 15px; 
+    position:relative;
+    background:#f7f7f7;
+    margin: 10px 0;
+    border-radius:3px;
+    transition: all 0.25s ease;
+    color: black;
+    border:none;
+}
+
+.grid-entry[data-priority="1"]{ border-right:10px solid #FC6042; }
+.grid-entry[data-priority="2"]{ border-right:10px solid #EEE657; }
+.grid-entry[data-priority="3"]{ border-right:10px solid #2CC990; }
+
+.grid-entry[data-status="closed"]{ 
+    display:none; 
+    opacity:0.3; 
+}
+
+.grid-entry[data-status="closed"] .description{ display: none; }
+
+.showHidden .grid-entry[data-status="closed"]{ display:flex; }
+
+.grid-entry:nth-child(even){ background:rgba(255,255,255,0.8); }
+.grid-entry:hover{ background:white; }
+.grid-entry:hover .edit{ opacity: 1; }
+
+button.status{
+    border: 0;
+    padding: 0;
+    font-size:24px;
+    background:none;
+    color: black;
+    position:relative;
+}
+
+button.status:before{
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border:1px solid grey;
+}
+
+button.status::after{ 
+    /*content:"🗹"; */
+    position:absolute;
+    left: 1px;
+    top: -9px;
+    font-size: 30px;
+    color: #2CC990;
+}
+
+button.status:hover::after{ content: "🗸"; }
+
+button.status.closed::after{ 
+    content:"🗴"; 
+    color:#FC6042;
+}
+
+.edit{
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    padding:0;
+    background:center/contain no-repeat;
+    /*position:absolute;
+    top: 5px;
+    right: -5px;*/
+    font-style:normal;
+    opacity:0;
+    transition: all 0.25s ease;
+    cursor:pointer; 
+    font-size:20px;
+}
+
+.edit::after{ content:"🖉"; }
+
+.entry-status { 
+    flex-grow: 0.5; 
+    padding: 0;
+    align-items: center;
+    display: flex;
+}
+
+.entry-duedate{ 
+    font-size:12px;
+    display: flex;
+    align-items: center;
+}
+
+.entry-content{ flex-grow: 4; }
+
+.entry-content > h3{ 
+    margin: 5px 0 0 0; 
+    font-size:14px;
+}
+
+.description{
+    font-size:12px;
+    margin:10px 0;
+}

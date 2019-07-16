@@ -1,0 +1,15 @@
+<script id="grid-entry-template" type="text/x-handlebars-template">
+    \{{#each this}}
+    <div id="todo:\{{id}}" class="grid-entry task row shadow" data-id="\{{id}}" data-priority="\{{prio}}" data-status="\{{status}}">
+        <div class="entry-status">
+            <button type="button" class="status \{{status}}" data-id="\{{id}}"></button>
+        </div>
+        <!--span class="entry-date">\{{date}}</span-->
+        <div class="entry-content">
+            <h3>\{{name}} <i class="edit" data-id="\{{id}}"></i></h3>
+            <div class="description">\{{desc}}</div>
+        </div>
+        <span class="entry-duedate">\{{due}}</span>
+    </div>
+    \{{/each}}
+</script>

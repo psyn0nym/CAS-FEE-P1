@@ -1,0 +1,51 @@
+<main id="main" class="container">
+        
+    <button class="btn" id="toggle-styles">toggle styles</button>
+    <button class="btn" id="clear-storage">clear local storage</button>
+    <button class="btn sort" id="sort-due" data-sort="due" data-order="asc">by due date</button>
+    <button class="btn sort" id="sort-date" data-sort="date" data-order="asc"> by create date</button>
+    <button class="btn sort" id="sort-prio" data-sort="prio" data-order="asc">by priority</button>
+    <button class="btn" id="sort-finished" data-sort="sort-finished">show finished</button>
+        
+    <div class="row">
+        <form id="tasks-input">
+            <input id="task-name" type="text" placeholder="Eintrag hinzufügen" class="shadow" autocomplete="off" required />
+            <fieldset>
+                <textarea id="task-description" placeholder="Beschreibung"></textarea>
+                <input id="task-duedate" class="datepicker" type="text" placeholder="Fälligkeitsdatum" autocomplete="off" required />
+                <select id="task-priority" required>
+                    <option value="" selected disabled hidden>Priorität</option>
+                    <option value="3">Tief</option>
+                    <option value="2">Mittel</option>
+                    <option value="1">Hoch</option>
+                </select>
+                <input id="task-id" type="hidden" />
+                <button id="add-task" type="submit" class="btn btn-primary"></button>
+            </fieldset>
+        </form>      
+
+        <form id="notes">
+            <div class="grid">
+                <div class="grid-header">
+                    <div class="row">
+                        <!--button>Create new Note</button>
+                        <select>
+                            <option value="Select" selected>Select Style</option>
+                            <option value="wide">Wide</option>
+                            <option value="boxed">Boxed</option>
+                        </select-->
+                    </div>
+                </div>
+                <div class="grid-body">
+                    
+                    <div id="tasks-entries">
+
+                    </div>
+                    {{> todo }}
+
+                </div>
+                <div class="grid-footer"></div>
+            </div>
+        </form>
+    </div>
+</main>
